@@ -63,13 +63,13 @@ from pathlib import Path
 
 
 if __name__ == "__main__":
-    exclude: list[str] = [
+    exclusions: list[str] = [
         r'.*\.git.*',
         r'.*\.md',
         r'.*/key-files/?.*'
     ]
     origin_path = Path("")
-    clone(origin_path, exclude)
+    clone(origin_path, exclusions)
 
 
 #     ____ origin                         bridge_file               ____ target
