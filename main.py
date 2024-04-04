@@ -37,7 +37,7 @@ def contains_patterns(path: str | Path, excluded_patterns: list[str]) -> bool:
     return False
 
 
-def clone(origin: Path, excluded_patterns: list[str]):
+def create_bridge(origin: Path, excluded_patterns: list[str]):
     target = Path("./output")
     bridge_file = Path("bridge.py")
     src_paths = filter(lambda x: not contains_patterns(x, excluded_patterns), origin.rglob("*"))
@@ -69,7 +69,7 @@ if __name__ == "__main__":
         r'.*/key-files/?.*'
     ]
     origin_path = Path("")
-    clone(origin_path, exclusions)
+    create_bridge(origin_path, exclusions)
 
 
 #     ____ origin                         bridge_file               ____ target
