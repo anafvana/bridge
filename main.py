@@ -1,4 +1,6 @@
+import argparse
 import re
+import time
 from pathlib import Path
 from typing import TextIO
 
@@ -62,13 +64,34 @@ from pathlib import Path
     bridge_file.chmod(777)
 
 
+def error_and_quit(msg:str):
+    print(msg)
+    time.sleep(.3)
+    print("TERMINATING")
+    time.sleep(.3)
+    exit(1)
+
 if __name__ == "__main__":
+    # ------ PATH ------ #
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--path", help="Path of folder to copy", type=str, required=True)
+    args = parser.parse_args()
+
+    origin_path = Path(args.path)
+    if not origin_path.exists():
+        error_and_quit(f"Path '{origin_path}' does not exist.")
+
+    if not origin_path.is_dir():
+        error_and_quit(f"Path '{origin_path}' is not a directory.")
+
+    # ------ EXCLUSIONS ------ #
     exclusions: list[str] = [
         r'.*\.git.*',
         r'.*\.md',
         r'.*/key-files/?.*'
     ]
-    origin_path = Path("")
+
+    # ------ RUN ------ #
     create_bridge(origin_path, exclusions)
 
 
@@ -81,4 +104,3 @@ if __name__ == "__main__":
 #    | |  ■src_file |        |         =================           | |  ■dest_file|        |
 #    | +------------         |         =================           | +------------         |
 #    +-----------------------+         =================           +-----------------------+
-
