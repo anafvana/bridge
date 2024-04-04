@@ -9,11 +9,12 @@ Unlikely, I know. But I have. And `bridge` is now my best friend.
 1. [OPTIONAL] Change `main.py`. Add your `exclusions`
 ```python
 if __name__ == "__main__":
+[...]
     exclusions: list[str] = [
         r'.*\.git.*',
         r'.*\.md',
     ]                       # Add pattens to exclude files from copy
-    clone(origin_path, exclusions)
+[...]
 ```
 
 2. Run script, specifying the path with `-p [PATH]`
